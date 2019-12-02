@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import Country from '../Country/Country';
+import CountryCard from '../Country-card/Country-card';
 
-class Countries extends Component {
-    constructor(props) {
-        super(props);
-    }
-
+class CountriesList extends Component {
     render() {
         return (
             <div>
                 {this.props.countries.map((country) => (
-                    <Country
+                    <CountryCard
+                        key={country.alpha3Code}
+                        id={country.alpha3Code}
                         name={country.name}
                     />
                 ))}
@@ -19,4 +17,4 @@ class Countries extends Component {
     }
 }
 
-export default Countries;
+export default CountriesList;

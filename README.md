@@ -1,5 +1,5 @@
 # react-countries
-React REST Countries API with color theme switcher
+React REST CountriesList API with color theme switcher
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

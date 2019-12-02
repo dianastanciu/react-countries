@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
-import Countries from './components/Countries/Countries';
+import CountriesList from './components/Countries-list/Countries-list';
+import NoMatch from './components/NoMatch/NoMatch';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
+import CountryDetails from "./components/Country-details/Country-details";
+
 
 class App extends Component {
     constructor() {
@@ -24,10 +32,15 @@ class App extends Component {
 
     render() {
         return(
-          <div>
-              <div>Loading countries data.</div>
-              <Countries countries={this.state.countries} />
-          </div>
+            <Router>
+                <Switch>
+                    <Route path="/" exact>
+                        <CountriesList countries={this.state.countries}/>
+                    </Route>
+                    <Route path="/country-details/:id" component={CountryDetails} />
+                    <Route path="*" component={NoMatch} />
+                </Switch>
+            </Router>
         );
     }
 }
