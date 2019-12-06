@@ -36,7 +36,7 @@ class CountryDetails extends Component {
     render() {
         return(
             (this.state.exists) ?
-                <div>
+                <div className="container">
                     <p>Name: {this.state.country.name}</p>
                     <p>Main currency: {this.state.country.currencies[0].name}</p>
                     <p>Population: {this.state.country.population}</p>

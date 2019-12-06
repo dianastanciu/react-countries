@@ -1,0 +1,28 @@
+/**
+* General styles
+**/
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 16px;
+}
+
+.container {
+    padding: 30px 5%;
+    background: hsl(0, 0%, 98%);
+}

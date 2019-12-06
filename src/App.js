@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import CountriesList from './components/Countries-list/Countries-list';
 import NoMatch from './components/NoMatch/NoMatch';
+import Header from './components/Header/Header';
 import {
     BrowserRouter as Router,
     Switch,
@@ -35,9 +36,13 @@ class App extends Component {
             <Router>
                 <Switch>
                     <Route path="/" exact>
+                        <Header />
                         <CountriesList countries={this.state.countries}/>
                     </Route>
-                    <Route path="/country-details/:id" component={CountryDetails} />
+                    <Route path="/country-details/:id">
+                        <Header />
+                        <CountryDetails/>
+                    </Route>
                     <Route path="*" component={NoMatch} />
                 </Switch>
             </Router>
