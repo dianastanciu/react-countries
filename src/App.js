@@ -12,37 +12,17 @@ import CountryDetails from "./components/Country-details/Country-details";
 
 
 class App extends Component {
-    constructor() {
-        super();
-
-        this.state = {
-            countries: []
-        };
-    }
-
-    componentDidMount() {
-        return this.fetchData();
-    }
-
-    fetchData() {
-        return fetch('https://restcountries.eu/rest/v2/all')
-            .then(res => res.json())
-            .then(data => this.setState({ countries: data }))
-            .catch(err => console.log(err));
-    }
-
     render() {
         return(
             <Router>
+                <Header />
                 <Switch>
                     <Route path="/" exact>
-                        <Header />
-                        <CountriesList countries={this.state.countries}/>
+                        <div className="container">
+                            <CountriesList/>
+                        </div>
                     </Route>
-                    <Route path="/country-details/:id">
-                        <Header />
-                        <CountryDetails/>
-                    </Route>
+                    <Route path="/country-details/:id" component={CountryDetails} />
                     <Route path="*" component={NoMatch} />
                 </Switch>
             </Router>
