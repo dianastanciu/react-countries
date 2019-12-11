@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CountryCard from '../Country-card/Country-card';
 import Sort from '../Sort/Sort';
 import styled from 'styled-components';
+import CountriesAPI from '../../services/CountriesAPI';
 
 const CardList = styled.div`
     display: flex;
@@ -12,15 +13,14 @@ class CountriesList extends Component {
     constructor(props) {
         super(props);
 
+        this.onLoad = this.onLoad.bind(this);
         this.state = {
             data: [],
         };
     }
 
     componentDidMount() {
-        fetch('https://restcountries.eu/rest/v2/all')
-            .then(res => res.json())
-            .then(data => this.onLoad(data));
+        CountriesAPI().then(data => this.onLoad(data));
     }
 
     onLoad = (data) => {
@@ -37,7 +37,7 @@ class CountriesList extends Component {
         if (data && data.length) {
             return (
                 <div>
-                    <Sort />
+                    <Sort data={data}/>
                     <CardList>
                         {data.map((country) => (
                             <CountryCard
