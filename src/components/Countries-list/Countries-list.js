@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect, useRef } from 'react';
 import CountryCard from '../Country-card/Country-card';
-import Sort from '../Sort/Sort';
 import styled from 'styled-components';
 import CountriesAPI from '../../services/CountriesAPI';
 
@@ -9,37 +8,89 @@ const CardList = styled.div`
     flex-flow: row wrap;
 `;
 
-class CountriesList extends Component {
-    constructor(props) {
-        super(props);
+const Container = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+`;
 
-        this.onLoad = this.onLoad.bind(this);
-        this.state = {
-            data: [],
-        };
-    }
+const Select = styled.select`
+    border: 0;
+    padding: 15px 20px;
+    box-shadow: 0 0 7px rgba(0,0,0,.08);
+    border-radius: 5px;
+    font-size: 13px;
+    color: #888;
+`;
 
-    componentDidMount() {
-        CountriesAPI().then(data => this.onLoad(data));
-    }
+const Input = styled.input`
+    border: 0;
+    padding: 15px 20px 15px 45px;
+    box-shadow: 0 0 7px rgba(0,0,0,.08);
+    border-radius: 5px;
+    font-size: 13px;
+    color: #888;
+    width: 35%;
+`;
 
-    onLoad = (data) => {
-        this.setState({
-            data: data
+export default function CountriesList() {
+    let [data, setData] = useState([]);
+    const [distinctRegions, setDistinctRegions] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        CountriesAPI().then(res => {
+            onLoad(res);
+            setLoading(false);
         });
+    }, []);
+
+    const onLoad = dataList => {
+        setData(...data, dataList);
+        getRegions(dataList);
     };
 
-    renderLoading = () => {
+    const getRegions = dataList => {
+        let regions = [];
+
+        dataList.map(dataItem => dataItem.region.length ? regions.push(dataItem.region) : '');
+
+        let regionsFiltered = regions.filter((item, index, arr) => arr.indexOf(item) === index);
+
+        setDistinctRegions(...distinctRegions, regionsFiltered);
+    };
+
+    const renderLoading = () => {
         return <div>Loading...</div>
     };
 
-    renderData = (data) => {
-        if (data && data.length) {
+    const change = event => {
+        let filtered = displayCountriesByRegion(event.target.value);
+
+        setData(data, filtered);
+        console.log(filtered);
+    };
+
+    const displayCountriesByRegion = value => {
+        return data.filter(obj => obj.region === value);
+    };
+
+    const renderData = (dataList, distinctRegionsItem) => {
+        if (dataList && dataList.length) {
             return (
                 <div>
-                    <Sort data={data}/>
+                    <Container>
+                        <Input type="text" placeholder="Search for a country..."/>
+                        <Select className="select-region" onChange={change}>
+                            <option value="" hidden>Filter by region</option>
+                            {distinctRegionsItem.map(item => {
+                                return <option key={item} value={item}>{item}</option>
+                            })}
+                        </Select>
+                    </Container>
                     <CardList>
-                        {data.map((country) => (
+                        {dataList.map(country => (
                             <CountryCard
                                 population={country.population}
                                 region={country.region}
@@ -58,14 +109,8 @@ class CountriesList extends Component {
         }
     };
 
-    render() {
-        const data = this.state.data;
-
-        return data ?
-            this.renderData(data)
-            :
-            this.renderLoading()
-    }
+    return loading ?
+        renderLoading()
+        :
+        renderData(data, distinctRegions);
 }
-
-export default CountriesList;
