@@ -39,6 +39,7 @@ export default function CountriesList() {
     const [distinctRegions, setDistinctRegions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedRegion, setSelectedRegion] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         CountriesAPI().then(res => {
@@ -70,12 +71,16 @@ export default function CountriesList() {
         setSelectedRegion(event.target.value);
     };
 
+    const search = event => {
+        setSearchTerm(event.target.value);
+    };
+
     const renderData = (dataList, distinctRegionsItem) => {
         if (dataList && dataList.length) {
             return (
                 <div>
                     <Container>
-                        <Input type="text" placeholder="Search for a country..."/>
+                        <Input type="text" placeholder="Search for a country..." onKeyUp={search}/>
                         <Select className="select-region" onChange={change}>
                             <option value="" hidden>Filter by region</option>
                             {distinctRegionsItem.map(item => {
@@ -86,6 +91,7 @@ export default function CountriesList() {
                     <CardList>
                         {dataList
                             .filter(country => !selectedRegion || country.region === selectedRegion)
+                            .filter(country => country.name.toLowerCase().indexOf( searchTerm.toLowerCase() ) !== -1)
                             .map(country => (
                             <CountryCard
                                 population={country.population}
