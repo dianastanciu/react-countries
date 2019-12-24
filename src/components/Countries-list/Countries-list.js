@@ -35,9 +35,10 @@ const Input = styled.input`
 `;
 
 export default function CountriesList() {
-    let [data, setData] = useState([]);
+    const [data, setData] = useState([]);
     const [distinctRegions, setDistinctRegions] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [selectedRegion, setSelectedRegion] = useState('');
 
     useEffect(() => {
         CountriesAPI().then(res => {
@@ -66,14 +67,7 @@ export default function CountriesList() {
     };
 
     const change = event => {
-        let filtered = displayCountriesByRegion(event.target.value);
-
-        setData(data, filtered);
-        console.log(filtered);
-    };
-
-    const displayCountriesByRegion = value => {
-        return data.filter(obj => obj.region === value);
+        setSelectedRegion(event.target.value);
     };
 
     const renderData = (dataList, distinctRegionsItem) => {
@@ -90,7 +84,9 @@ export default function CountriesList() {
                         </Select>
                     </Container>
                     <CardList>
-                        {dataList.map(country => (
+                        {dataList
+                            .filter(country => !selectedRegion || country.region === selectedRegion)
+                            .map(country => (
                             <CountryCard
                                 population={country.population}
                                 region={country.region}
