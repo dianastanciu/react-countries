@@ -11,9 +11,11 @@ import CountryDetails from "./components/Country-details/Country-details";
 import styled, { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './theme';
 import { GlobalStyles } from './global';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 
 const Nav = styled.nav`
-    padding: 0 5%;
+    padding: 0 85px;
     box-shadow: 1px 2px 4px rgba(0,0,0,.2);
     position: relative;
     
@@ -49,7 +51,10 @@ export default function App() {
                             <h2>Where in the world?</h2>
                         </li>
                         <li>
-                            <ThemeToggler onClick={toggleTheme}>Dark mode</ThemeToggler>
+                            <ThemeToggler onClick={toggleTheme}>
+                                <FontAwesomeIcon icon={theme === 'light' ? faMoon : faSun}/>
+                                {theme === 'light' ? ' Dark ' : ' Light '}mode
+                            </ThemeToggler>
                         </li>
                     </ul>
                 </Nav>
