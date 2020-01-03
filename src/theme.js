@@ -1,13 +1,23 @@
+//colors
+const darkElements = '#2b3743';
+const darkText = '#feffff';
+const darkBackground = '#202d36';
+const lightElements = '#fff';
+const lightHeader = 'rgb(255, 255, 255)';
+const lightText = '#18191b';
+const lightBackground = 'hsl(0, 0%, 98%)';
+const lightInput = 'hsl(0, 0%, 52%)';
+
 export const lightTheme = {
-    body: '#fff',
-    text: '#363537',
-    toggleBorder: '#FFF',
-    gradient: 'linear-gradient(#39598A, #79D7ED)',
+    header: lightHeader,
+    body: lightBackground,
+    text: lightText,
+    element: lightElements,
 };
 
 export const darkTheme = {
-    body: '#363537',
-    text: '#FAFAFA',
-    toggleBorder: '#6B8096',
-    gradient: 'linear-gradient(#091236, #1E215D)',
+    header: darkElements,
+    body: darkBackground,
+    text: darkText,
+    element: darkElements,
 };
