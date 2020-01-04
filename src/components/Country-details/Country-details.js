@@ -69,10 +69,18 @@ class CountryDetails extends Component {
                             <Row>
                                 <Col>
                                     <p>Native name: {this.state.country.nativeName}</p>
-                                    <p>Population: <NumberFormat value={this.state.country.population} displayType={'text'} thousandSeparator={true}/></p>
-                                    <p>Region: {this.state.country.region}</p>
-                                    <p>Subregion: {this.state.country.subregion}</p>
-                                    <p>Capital: {this.state.country.capital}</p>
+                                    <p>
+                                        Population:&nbsp;
+                                        {
+                                            (this.state.country.population === 0) ?
+                                                'Uninhabited'
+                                                :
+                                                <NumberFormat value={this.state.country.population} displayType={'text'} thousandSeparator={true}/>
+                                        }
+                                    </p>
+                                    <p>Region: {(this.state.country.region) ? this.state.country.region : 'N/A'}</p>
+                                    <p>Subregion: {(this.state.country.subregion) ? this.state.country.subregion : 'N/A'}</p>
+                                    <p>Capital: {(this.state.country.capital) ? this.state.country.capital : 'N/A'}</p>
                                 </Col>
                                 <Col>
                                     <p>Top Level Domain: {this.state.country.topLevelDomain}</p>

@@ -8,7 +8,7 @@ import WebFont from 'webfontloader';
 
 WebFont.load({
     google: {
-        families: ['Nunito Sans:300,600,800', 'sans-serif']
+        families: ['Nunito Sans:300,600,700,800', 'sans-serif']
     }
 });
 

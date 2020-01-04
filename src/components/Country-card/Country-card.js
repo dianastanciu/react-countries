@@ -27,12 +27,21 @@ const Card = styled.div`
 
 const CardInfo = styled.div`
     text-align: left;
-    padding: 0 20px 20px 20px;
+    padding: 20px;
     font-size: 14px;
     
     h2 {
         font-size: 18px;
     }
+    
+    p {
+        margin: 0;
+    }
+`;
+
+const Emphasized = styled.span`
+    font-weight: 600;
+    padding-right: 5px;
 `;
 
 class CountryCard extends Component {
@@ -42,13 +51,18 @@ class CountryCard extends Component {
                 <Card className="country-card">
                     <Link to={`country-details/${this.props.id}`}>
                         <img src={this.props.flag} alt=""/>
-                        <CardInfo className="country-card-info">
+                        <CardInfo>
                             <h2>{this.props.name}</h2>
-                            <p><strong>Population</strong>:
-                                <NumberFormat value={this.props.population} displayType={'text'} thousandSeparator={true}/>
+                            <p><Emphasized>Population:</Emphasized>
+                                {
+                                    (this.props.population === 0) ?
+                                        'Uninhabited'
+                                        :
+                                        <NumberFormat value={this.props.population} displayType={'text'} thousandSeparator={true}/>
+                                }
                             </p>
-                            <p><strong>Region</strong>: {this.props.region}</p>
-                            <p><strong>Capital</strong>: {this.props.capital}</p>
+                            <p><Emphasized>Region:</Emphasized>{(this.props.region) ? this.props.region : 'N/A'}</p>
+                            <p><Emphasized>Capital:</Emphasized>{(this.props.capital.length) ? this.props.capital : 'N/A'}</p>
                         </CardInfo>
                     </Link>
                 </Card>

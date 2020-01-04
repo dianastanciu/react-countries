@@ -3,8 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CountryCard from '../Country-card/Country-card';
 import styled from 'styled-components';
 import CountriesAPI from '../../services/CountriesAPI';
-import {Container, Row} from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faMoon, faSearch, faSun} from '@fortawesome/free-solid-svg-icons';
 
 const Select = styled.select`
     border: 0;
@@ -17,10 +19,29 @@ const Select = styled.select`
 const Input = styled.input`
     border: 0;
     padding: 15px 20px 15px 45px;
-    box-shadow: 0 0 7px rgba(0,0,0,.08);
     border-radius: 5px;
     font-size: 13px;
-    width: 35%;
+    width: 100%;
+`;
+
+const FilterSection = styled.div`
+    margin: 0 0 35px;
+    display: flex;
+    justify-content: space-between;
+`;
+
+const SearchInput = styled.div`
+    display: flex;
+    align-items: center;
+    position: relative;
+    
+    svg {
+        margin-left: 15px;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+    }
 `;
 
 export default function CountriesList() {
@@ -54,12 +75,12 @@ export default function CountriesList() {
 
     const renderLoading = () => {
         return(
-            <div>
+            <Container>
                 <Spinner animation="grow" role="status">
                     <span className="sr-only">Loading...</span>
                 </Spinner>
                 Loading...
-            </div>
+            </Container>
         );
     };
 
@@ -75,18 +96,22 @@ export default function CountriesList() {
         if (dataList && dataList.length) {
             return (
                 <Container>
-                    <div>
-                        <Input type="text" placeholder={'Search for a country...'} onKeyUp={search}/>
+                    <FilterSection>
+                        <SearchInput>
+                            <FontAwesomeIcon icon={faSearch}/>
+                            <Input type="text" placeholder={'Search for a country...'} onKeyUp={search}/>
+                        </SearchInput>
                         <Select className="select-region" onChange={change}>
                             <option value="" hidden>Filter by region</option>
+                            <option value="All">All</option>
                             {distinctRegionsItem.map(item => {
                                 return <option key={item} value={item}>{item}</option>
                             })}
                         </Select>
-                    </div>
+                    </FilterSection>
                     <Row>
                         {dataList
-                            .filter(country => !selectedRegion || country.region === selectedRegion)
+                            .filter(country => !selectedRegion || selectedRegion === 'All' || country.region === selectedRegion)
                             .filter(country => country.name.toLowerCase().indexOf( searchTerm.toLowerCase() ) !== -1)
                             .map(country => (
                                 <CountryCard
