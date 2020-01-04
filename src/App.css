@@ -33,3 +33,45 @@ body,
     display: flex;
     flex-direction: column;
 }
+
+@media screen and (max-width: 576px) {
+    .country-card-col {
+        max-width: 300px !important;
+        margin: 0 auto !important;
+    }
+}
+
+.country-details-flag {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    padding-right: 50px;
+}
+
+@media screen and (max-width: 576px) {
+    .country-details-flag {
+        padding-bottom: 35px;
+        padding-right: 0;
+    }
+
+    .country-details-name {
+        font-size: 23px;
+    }
+
+    .country-details-info-col {
+        margin: 15px 0;
+    }
+}
+
+.country-border-state-label {
+    box-shadow: 2px 2px 7px 1px rgba(0, 0, 0, .2);
+    margin-right: 10px;
+    margin-bottom: 20px;
+    padding: 3px 10px;
+    display: inline-block;
+    border-radius: 3px;
+}
+
+.back-button {
+    padding: 3px 20px;
+}

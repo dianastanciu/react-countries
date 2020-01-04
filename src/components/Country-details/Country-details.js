@@ -3,13 +3,20 @@ import { withRouter, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import NumberFormat from 'react-number-format';
 import { Container, Row, Col } from 'react-bootstrap';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-const CountryBorderStateLabel = styled.span`
-    box-shadow: 2px 2px 7px 1px rgba(0,0,0,.2);
-    margin-right: 10px;
-    margin-bottom: 20px;
-    padding: 3px 10px;
-    display: inline-block;
+const Emphasized = styled.span`
+    font-weight: 600;
+    padding-right: 5px;
+`;
+
+const CountryDetail = styled.p`
+    margin: 5px 0;
+`;
+
+const BackButton = styled.div`
+    margin-bottom: 30px;
 `;
 
 class CountryDetails extends Component {
@@ -57,42 +64,48 @@ class CountryDetails extends Component {
         return(
             (this.state.exists) ?
                 <Container>
-                    <Link to={'/'}>Back</Link>
+                    <BackButton>
+                        <Link to={'/'}>
+                            <span className="country-border-state-label back-button">
+                                <FontAwesomeIcon icon={faArrowLeft}/> Back
+                            </span>
+                        </Link>
+                    </BackButton>
 
                     <Row>
-                        <Col>
+                        <Col xs={12} sm={6}>
                             <img className="country-details-flag" src={this.state.country.flag} alt={this.state.country.name} width={100} height={50}/>
                         </Col>
-                        <Col>
-                            <h1>{this.state.country.name}</h1>
-
+                        <Col xs={12} sm={6}>
+                            <h2 className="country-details-name"><strong>{this.state.country.name}</strong></h2>
+                            <br/>
                             <Row>
-                                <Col>
-                                    <p>Native name: {this.state.country.nativeName}</p>
-                                    <p>
-                                        Population:&nbsp;
+                                <Col sm={6} xs={12}>
+                                    <CountryDetail><Emphasized>Native name:</Emphasized> {this.state.country.nativeName}</CountryDetail>
+                                    <CountryDetail>
+                                        <Emphasized>Population:</Emphasized>&nbsp;
                                         {
                                             (this.state.country.population === 0) ?
                                                 'Uninhabited'
                                                 :
                                                 <NumberFormat value={this.state.country.population} displayType={'text'} thousandSeparator={true}/>
                                         }
-                                    </p>
-                                    <p>Region: {(this.state.country.region) ? this.state.country.region : 'N/A'}</p>
-                                    <p>Subregion: {(this.state.country.subregion) ? this.state.country.subregion : 'N/A'}</p>
-                                    <p>Capital: {(this.state.country.capital) ? this.state.country.capital : 'N/A'}</p>
+                                    </CountryDetail>
+                                    <CountryDetail><Emphasized>Region:</Emphasized>{(this.state.country.region) ? this.state.country.region : 'N/A'}</CountryDetail>
+                                    <CountryDetail><Emphasized>Subregion:</Emphasized>{(this.state.country.subregion) ? this.state.country.subregion : 'N/A'}</CountryDetail>
+                                    <CountryDetail><Emphasized>Capital:</Emphasized>{(this.state.country.capital) ? this.state.country.capital : 'N/A'}</CountryDetail>
                                 </Col>
-                                <Col>
-                                    <p>Top Level Domain: {this.state.country.topLevelDomain}</p>
-                                    <p>Currencies: {this.state.country.currencies.map(currency => currency.name + '. ')}</p>
-                                    <p>Languages: {this.state.country.languages.map(language => language.name + '. ')}</p>
+                                <Col sm={6} xs={12} className="country-details-info-col">
+                                    <CountryDetail><Emphasized>Top Level Domain:</Emphasized> {this.state.country.topLevelDomain}</CountryDetail>
+                                    <CountryDetail><Emphasized>Currencies:</Emphasized> {this.state.country.currencies.map(currency => currency.name + '. ')}</CountryDetail>
+                                    <CountryDetail><Emphasized>Languages:</Emphasized> {this.state.country.languages.map(language => language.name + '. ')}</CountryDetail>
                                 </Col>
                             </Row>
-
+                            <br/>
                             {(this.state.borders.length) ?
                                 <div>
-                                    Border countries:
-                                    {this.state.borders.map(borderCountryName => <CountryBorderStateLabel>{borderCountryName}</CountryBorderStateLabel>)}
+                                    <Emphasized>Border countries:</Emphasized>
+                                    {this.state.borders.map(borderCountryName => <span className="country-border-state-label">{borderCountryName}</span>)}
                                 </div>
                                 :
                                 <div>

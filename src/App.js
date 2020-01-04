@@ -34,6 +34,13 @@ const Nav = styled.nav`
         font-size: 22px;
         font-weight: 700;
     }
+    
+    @media screen and (max-width: 412px) {
+        h2 { 
+            font-size: 18px;
+            margin: 0;
+        }
+    } 
 `;
 
 const ThemeToggler = styled.button`
@@ -41,8 +48,12 @@ const ThemeToggler = styled.button`
     border: 0;
     padding: 10px;
     text-transform: capitalize; 
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
+    
+    @media screen and (max-width: 412px) {
+        font-size: 13px;
+    } 
 `;
 
 export default function App() {

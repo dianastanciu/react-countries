@@ -47,7 +47,7 @@ const Emphasized = styled.span`
 class CountryCard extends Component {
     render() {
         return(
-            <Col xs={12} sm={6} md={4} lg={3}>
+            <Col xs={12} sm={6} md={4} lg={3} className="country-card-col">
                 <Card className="country-card">
                     <Link to={`country-details/${this.props.id}`}>
                         <img src={this.props.flag} alt=""/>

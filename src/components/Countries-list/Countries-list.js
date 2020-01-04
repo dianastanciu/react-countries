@@ -28,6 +28,15 @@ const FilterSection = styled.div`
     margin: 0 0 35px;
     display: flex;
     justify-content: space-between;
+    
+    @media screen and (max-width: 575px) {
+        flex-direction: column;
+        
+        select {
+            width: 60%;
+            margin-top: 30px;
+        }
+    }
 `;
 
 const SearchInput = styled.div`

@@ -24,4 +24,9 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({theme}) => theme.element}
     color: ${({theme}) => theme.text}
   }
+  
+  .country-border-state-label {
+    background: ${({theme}) => theme.element}
+    color: ${({theme}) => theme.text}
+   }
   `;
