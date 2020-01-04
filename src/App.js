@@ -13,11 +13,13 @@ import { lightTheme, darkTheme } from './theme';
 import { GlobalStyles } from './global';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
+import { Container } from 'react-bootstrap';
 
 const Nav = styled.nav`
-    padding: 0 85px;
     box-shadow: 1px 2px 4px rgba(0,0,0,.2);
     position: relative;
+    margin-bottom: 30px;
+    padding: 10px 0;
     
     ul {
         padding: 0;
@@ -27,6 +29,18 @@ const Nav = styled.nav`
         justify-content: space-between;
         align-items: center;
     }
+    
+    h2 {
+        font-size: 22px;
+        font-weight: 700;
+    }
+    
+    @media screen and (max-width: 412px) {
+        h2 { 
+            font-size: 18px;
+            margin: 0;
+        }
+    } 
 `;
 
 const ThemeToggler = styled.button`
@@ -34,6 +48,12 @@ const ThemeToggler = styled.button`
     border: 0;
     padding: 10px;
     text-transform: capitalize; 
+    font-size: 15px;
+    font-weight: 600;
+    
+    @media screen and (max-width: 412px) {
+        font-size: 13px;
+    } 
 `;
 
 export default function App() {
@@ -46,23 +66,23 @@ export default function App() {
             <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
                 <GlobalStyles />
                 <Nav>
-                    <ul>
-                        <li>
-                            <h2>Where in the world?</h2>
-                        </li>
-                        <li>
-                            <ThemeToggler onClick={toggleTheme}>
-                                <FontAwesomeIcon icon={theme === 'light' ? faMoon : faSun}/>
-                                {theme === 'light' ? ' Dark ' : ' Light '}mode
-                            </ThemeToggler>
-                        </li>
-                    </ul>
+                    <Container>
+                        <ul>
+                            <li>
+                                <h2>Where in the world?</h2>
+                            </li>
+                            <li>
+                                <ThemeToggler onClick={toggleTheme}>
+                                    <FontAwesomeIcon icon={theme === 'light' ? faMoon : faSun}/>
+                                    {theme === 'light' ? ' Dark ' : ' Light '}mode
+                                </ThemeToggler>
+                            </li>
+                        </ul>
+                    </Container>
                 </Nav>
                 <Switch>
                     <Route path="/" exact>
-                        <div className="container">
-                            <CountriesList/>
-                        </div>
+                        <CountriesList/>
                     </Route>
                     <Route path="/country-details/:id" component={CountryDetails} />
                     <Route path="*" component={NoMatch} />
