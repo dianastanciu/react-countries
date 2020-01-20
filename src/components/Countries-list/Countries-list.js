@@ -4,7 +4,7 @@ import CountryCard from '../Country-card/Country-card';
 import styled from 'styled-components';
 import CountriesAPI from '../../services/CountriesAPI';
 import { Container, Row } from 'react-bootstrap';
-import Spinner from 'react-bootstrap/Spinner';
+import Loading from '../Loading/Loading';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faMoon, faSearch, faSun} from '@fortawesome/free-solid-svg-icons';
 
@@ -35,17 +35,6 @@ export default function CountriesList() {
         let regionsFiltered = regions.filter((item, index, arr) => arr.indexOf(item) === index);
 
         setDistinctRegions(...distinctRegions, regionsFiltered);
-    };
-
-    const renderLoading = () => {
-        return(
-            <Container>
-                <Spinner animation="grow" role="status">
-                    <span className="sr-only">Loading...</span>
-                </Spinner>
-                Loading...
-            </Container>
-        );
     };
 
     const change = event => {
@@ -99,7 +88,7 @@ export default function CountriesList() {
     };
 
     return loading ?
-        renderLoading()
+        <Loading/>
         :
         renderData(data, distinctRegions);
 }
