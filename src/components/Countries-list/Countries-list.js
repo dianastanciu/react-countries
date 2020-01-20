@@ -24,6 +24,13 @@ const Input = styled.input`
     width: 100%;
 `;
 
+const Label = styled.label`
+    position: absolute;
+    top: -99999px;
+    left: -99999px;
+    opacity: 0;
+`;
+
 const FilterSection = styled.div`
     margin: 0 0 35px;
     display: flex;
@@ -108,9 +115,11 @@ export default function CountriesList() {
                     <FilterSection>
                         <SearchInput>
                             <FontAwesomeIcon icon={faSearch}/>
-                            <Input type="text" placeholder={'Search for a country...'} onKeyUp={search}/>
+                            <Label for="searchInput">Search for a country...</Label>
+                            <Input id="searchInput" type="text" placeholder={'Search for a country...'} onKeyUp={search}/>
                         </SearchInput>
-                        <Select className="select-region" onChange={change}>
+                        <Label for="selectRegion">Filter by region</Label>
+                        <Select id="selectRegion" className="select-region" onChange={change}>
                             <option value="" hidden>Filter by region</option>
                             <option value="All">All</option>
                             {distinctRegionsItem.map(item => {
