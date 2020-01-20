@@ -8,58 +8,6 @@ import Spinner from 'react-bootstrap/Spinner';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faMoon, faSearch, faSun} from '@fortawesome/free-solid-svg-icons';
 
-const Select = styled.select`
-    border: 0;
-    padding: 15px 20px;
-    box-shadow: 0 0 7px rgba(0,0,0,.08);
-    border-radius: 5px;
-    font-size: 13px;
-`;
-
-const Input = styled.input`
-    border: 0;
-    padding: 15px 20px 15px 45px;
-    border-radius: 5px;
-    font-size: 13px;
-    width: 100%;
-`;
-
-const Label = styled.label`
-    position: absolute;
-    top: -99999px;
-    left: -99999px;
-    opacity: 0;
-`;
-
-const FilterSection = styled.div`
-    margin: 0 0 35px;
-    display: flex;
-    justify-content: space-between;
-    
-    @media screen and (max-width: 575px) {
-        flex-direction: column;
-        
-        select {
-            width: 60%;
-            margin-top: 30px;
-        }
-    }
-`;
-
-const SearchInput = styled.div`
-    display: flex;
-    align-items: center;
-    position: relative;
-    
-    svg {
-        margin-left: 15px;
-        position: absolute;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-    }
-`;
-
 export default function CountriesList() {
     const [data, setData] = useState([]);
     const [distinctRegions, setDistinctRegions] = useState([]);
@@ -155,3 +103,55 @@ export default function CountriesList() {
         :
         renderData(data, distinctRegions);
 }
+
+const Select = styled.select`
+    border: 0;
+    padding: 15px 20px;
+    box-shadow: 0 0 7px rgba(0,0,0,.08);
+    border-radius: 5px;
+    font-size: 13px;
+`;
+
+const Input = styled.input`
+    border: 0;
+    padding: 15px 20px 15px 45px;
+    border-radius: 5px;
+    font-size: 13px;
+    width: 100%;
+`;
+
+const Label = styled.label`
+    position: absolute;
+    top: -99999px;
+    left: -99999px;
+    opacity: 0;
+`;
+
+const FilterSection = styled.div`
+    margin: 0 0 35px;
+    display: flex;
+    justify-content: space-between;
+    
+    @media screen and (max-width: 575px) {
+        flex-direction: column;
+        
+        select {
+            width: 60%;
+            margin-top: 30px;
+        }
+    }
+`;
+
+const SearchInput = styled.div`
+    display: flex;
+    align-items: center;
+    position: relative;
+    
+    svg {
+        margin-left: 15px;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+    }
+`;

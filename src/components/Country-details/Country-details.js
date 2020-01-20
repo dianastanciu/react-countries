@@ -6,19 +6,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-const Emphasized = styled.span`
-    font-weight: 600;
-    padding-right: 5px;
-`;
-
-const CountryDetail = styled.p`
-    margin: 5px 0;
-`;
-
-const BackButton = styled.div`
-    margin-bottom: 30px;
-`;
-
 class CountryDetails extends Component {
     constructor(props) {
         super(props);
@@ -121,3 +108,16 @@ class CountryDetails extends Component {
 }
 
 export default withRouter(CountryDetails);
+
+const Emphasized = styled.span`
+    font-weight: 600;
+    padding-right: 5px;
+`;
+
+const CountryDetail = styled.p`
+    margin: 5px 0;
+`;
+
+const BackButton = styled.div`
+    margin-bottom: 30px;
+`;
